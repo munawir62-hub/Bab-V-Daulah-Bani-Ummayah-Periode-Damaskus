@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPI PAI - Daulah Bani Umayyah Damaskus | SMP Islam Al Azhar 26 Yogyakarta</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Poppins & Scheherazade New -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- html2pdf.js for Certificate Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .font-arabic { font-family: 'Amiri', serif; }
+        .font-serif-gold { font-family: 'Cinzel', serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        @media print {
+            body * { visibility: hidden; }
+            #printable-certificate, #printable-certificate * { visibility: visible; }
+            #printable-certificate { position: absolute; left: 0; top: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 flex flex-col min-h-screen selection:bg-emerald-500 selection:text-white">
+
+    <!-- Top Identity Header -->
+    <header class="bg-emerald-900 text-white shadow-lg sticky top-0 z-50 border-b-2 border-amber-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="w-11 h-11 bg-amber-500 rounded-xl flex items-center justify-center text-emerald-950 font-bold text-2xl shadow-md border-2 border-amber-300">
+                    <i class="fa-solid fa-mosque"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold tracking-wide leading-tight">SMP ISLAM AL AZHAR 26 YOGYAKARTA</h1>
+                    <p class="text-xs text-amber-300 font-medium">MPI PAI & Budi Pekerti • Kelas 7 SMP Semester 1</p>
+                </div>
+            </div>
+
+            <!-- Teacher Badge & Student Info -->
+            <div class="flex flex-wrap items-center gap-2">
+                <div class="bg-emerald-800/90 px-3 py-1.5 rounded-lg border border-emerald-700 text-xs text-emerald-100">
+                    <i class="fa-solid fa-user-tie text-amber-400 mr-1.5"></i>
+                    <span>Guru Pengampu: <strong>H. Munawir, S.Pd.I., M.Pd. Gr.</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="bg-emerald-950 border-t border-emerald-800">
+            <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex overflow-x-auto no-scrollbar py-1 text-xs sm:text-sm font-medium">
+                <button onclick="switchTab('pendahuluan')" id="nav-pendahuluan" class="nav-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg whitespace-nowrap text-emerald-200 hover:bg-emerald-800 transition">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Pendahuluan</span>
+                </button>
+                <button onclick="switchTab('peta-konsep')" id="nav-peta-konsep" class="nav-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg whitespace-nowrap text-emerald-200 hover:bg-emerald-800 transition">
+                    <i class="fa-solid fa-sitemap"></i>
+                    <span>Peta Konsep</span>
+                </button>
+                <button onclick="switchTab('materi')" id="nav-materi" class="nav-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg whitespace-nowrap text-emerald-200 hover:bg-emerald-800 transition">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Materi & Peradaban</span>
+                </button>
+                <button onclick="switchTab('video')" id="nav-video" class="nav-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg whitespace-nowrap text-emerald-200 hover:bg-emerald-800 transition">
+                    <i class="fa-solid fa-circle-play"></i>
+                    <span>Video Edukasi</span>
+                </button>
+                <button onclick="switchTab('latihan')" id="nav-latihan" class="nav-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg whitespace-nowrap text-emerald-200 hover:bg-emerald-800 transition">
+                    <i class="fa-solid fa-pen-ruler"></i>
+                    <span>Soal Latihan</span>
+                </button>
+                <button onclick="switchTab('ujikom')" id="nav-ujikom" class="nav-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg whitespace-nowrap text-emerald-200 hover:bg-emerald-800 transition">
+                    <i class="fa-solid fa-award text-amber-400"></i>
+                    <span class="text-amber-300 font-bold">Uji Kompetensi & Sertifikat</span>
+                </button>
+                <button onclick="switchTab('refleksi')" id="nav-refleksi" class="nav-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg whitespace-nowrap text-emerald-200 hover:bg-emerald-800 transition">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    <span>Refleksi Kepemimpinan</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sticky Student Profile & Progress Tracker -->
+    <div class="bg-white border-b border-slate-200 shadow-sm sticky top-[105px] md:top-[73px] z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs md:text-sm">
+            
+            <!-- Student Identity Fields -->
+            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                <span class="font-bold text-emerald-900 flex items-center gap-1.5"><i class="fa-solid fa-id-card text-amber-500"></i> Identitas Siswa:</span>
+                <input type="text" id="student-name" oninput="updateStudentData()" placeholder="Ketik Nama Lengkap..." class="px-3 py-1 border border-slate-300 rounded-md focus:ring-2 focus:ring-emerald-500 outline-none w-44 font-medium text-slate-800">
+                <input type="text" id="student-class" oninput="updateStudentData()" placeholder="Kelas (Contoh: 7 Al-Khawarizmi)" class="px-3 py-1 border border-slate-300 rounded-md focus:ring-2 focus:ring-emerald-500 outline-none w-48 font-medium text-slate-800">
+            </div>
+
+            <!-- Learning Completion Progress Bar -->
+            <div class="flex items-center space-x-3 w-full md:w-80 bg-emerald-50 p-2 rounded-xl border border-emerald-200">
+                <div class="flex-grow">
+                    <div class="flex justify-between items-center text-xs font-semibold mb-1">
+                        <span class="text-emerald-900"><i class="fa-solid fa-chart-line text-emerald-600 mr-1"></i> Ketuntasan Belajar:</span>
+                        <span id="progress-text" class="text-emerald-700 font-bold">0%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                        <div id="progress-bar" class="bg-gradient-to-r from-emerald-500 to-amber-500 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+        <!-- TAB 1: PENDAHULUAN -->
+        <section id="tab-pendahuluan" class="tab-content block space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+                
+                <!-- Hero Banner -->
+                <div class="relative bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 text-white rounded-2xl p-6 md:p-8 overflow-hidden shadow-md mb-8 border-b-4 border-amber-400">
+                    <div class="relative z-10 space-y-3">
+                        <span class="bg-amber-400 text-emerald-950 font-bold text-xs uppercase px-3 py-1 rounded-full tracking-wider">
+                            Sejarah Kebudayaan Islam (SKI)
+                        </span>
+                        <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight">Daulah Bani Umayyah Periode Damaskus</h2>
+                        <p class="text-emerald-100 text-sm md:text-base leading-relaxed max-w-3xl">
+                            Awal mula era kejayaan peradaban Islam paska Khulafaur Rosyidin yang meletakkan pondasi administratif, arsitektur megah, serta ekspansi ilmu pengetahuan ke penjuru tiga benua.
+                        </p>
+                    </div>
+                    <i class="fa-solid fa-landmark absolute -bottom-6 -right-6 text-9xl text-emerald-700/30"></i>
+                </div>
+
+                <!-- Capaian & Tujuan Pembelajaran -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-emerald-50/70 p-5 rounded-2xl border border-emerald-200">
+                        <h3 class="font-bold text-emerald-900 flex items-center gap-2 mb-3 text-base">
+                            <i class="fa-solid fa-bullseye text-emerald-600"></i> Tujuan Pembelajaran
+                        </h3>
+                        <p class="text-sm text-slate-700 leading-relaxed bg-white p-4 rounded-xl border border-emerald-100 shadow-sm font-medium">
+                            Peserta didik mampu <strong class="text-emerald-800">merefleksikan sejarah dan peran kekhalifahan Islam paska Khulafaur Rosyidin Bani Umayyah periode Damaskus</strong> dalam kehidupan sehari-hari dengan meneladani nilai-nilai kepemimpinan mulia.
+                        </p>
+                    </div>
+
+                    <div class="bg-amber-50/70 p-5 rounded-2xl border border-amber-200">
+                        <h3 class="font-bold text-amber-900 flex items-center gap-2 mb-3 text-base">
+                            <i class="fa-solid fa-list-check text-amber-700"></i> Indikator Ketercapaian (IKTP)
+                        </h3>
+                        <ul class="space-y-2 text-xs md:text-sm text-slate-700">
+                            <li class="flex items-start gap-2 bg-white p-2.5 rounded-lg border border-amber-100">
+                                <span class="w-5 h-5 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold text-xs mt-0.5">1</span>
+                                <span>Mengidentifikasi tokoh pendiri Daulah Bani Umayyah Damaskus.</span>
+                            </li>
+                            <li class="flex items-start gap-2 bg-white p-2.5 rounded-lg border border-amber-100">
+                                <span class="w-5 h-5 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold text-xs mt-0.5">2</span>
+                                <span>Mengidentifikasi kemajuan peradaban masa Bani Umayyah Damaskus.</span>
+                            </li>
+                            <li class="flex items-start gap-2 bg-white p-2.5 rounded-lg border border-amber-100">
+                                <span class="w-5 h-5 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold text-xs mt-0.5">3</span>
+                                <span>Menjelaskan kemajuan peradaban Islam di masa Khalifah Bani Umayyah Damaskus.</span>
+                            </li>
+                            <li class="flex items-start gap-2 bg-white p-2.5 rounded-lg border border-amber-100">
+                                <span class="w-5 h-5 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold text-xs mt-0.5">4</span>
+                                <span>Mengevaluasi penyebab runtuhnya Daulah Bani Umayyah Damaskus.</span>
+                            </li>
+                            <li class="flex items-start gap-2 bg-white p-2.5 rounded-lg border border-amber-100">
+                                <span class="w-5 h-5 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold text-xs mt-0.5">5</span>
+                                <span>Merefleksikan nilai kepemimpinan Khalifah Daulah Bani Umayyah Damaskus.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center pt-4 border-t border-slate-200">
+                    <button onclick="completeTopic('read-pendahuluan'); switchTab('peta-konsep');" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-8 rounded-xl shadow-md transition transform hover:-translate-y-0.5">
+                        Mulai Pelajari Peta Konsep <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 2: PETA KONSEP MATERI -->
+        <section id="tab-peta-konsep" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+                <div class="text-center max-w-2xl mx-auto mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800">Peta Konsep Pembelajaran</h2>
+                    <p class="text-slate-600 text-sm mt-1">Struktur hirarki materi Sejarah Daulah Bani Umayyah Periode Damaskus (661 - 750 M)</p>
+                </div>
+
+                <!-- Interactive Mindmap Grid -->
+                <div class="space-y-6">
+                    <!-- Central Node -->
+                    <div class="flex justify-center">
+                        <div class="bg-emerald-800 text-white px-8 py-4 rounded-2xl shadow-lg text-center border-2 border-amber-400">
+                            <h3 class="font-extrabold text-lg md:text-xl">DAULAH BANI UMAYYAH DAMASKUS</h3>
+                            <p class="text-xs text-amber-300">Didirikan oleh Muawiyah bin Abi Sufyan (41 H / 661 M)</p>
+                        </div>
+                    </div>
+
+                    <!-- Branches -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        
+                        <div class="bg-slate-50 border-2 border-emerald-500 rounded-xl p-4 text-center hover:shadow-md transition">
+                            <div class="w-10 h-10 bg-emerald-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">1</div>
+                            <h4 class="font-bold text-emerald-900 text-sm mb-2">Sejarah & Tokoh Pendiri</h4>
+                            <p class="text-xs text-slate-600">Peristiwa Amul Jama'ah, Perang Siffin, serta Peran Muawiyah bin Abi Sufyan.</p>
+                        </div>
+
+                        <div class="bg-slate-50 border-2 border-emerald-500 rounded-xl p-4 text-center hover:shadow-md transition">
+                            <div class="w-10 h-10 bg-emerald-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">2</div>
+                            <h4 class="font-bold text-emerald-900 text-sm mb-2">Kemajuan Peradaban</h4>
+                            <p class="text-xs text-slate-600">Sistem Diwan, Pembukuan Hadis, Bahasa Arab resmi, Mata Uang, & Masjid Umayyah.</p>
+                        </div>
+
+                        <div class="bg-slate-50 border-2 border-emerald-500 rounded-xl p-4 text-center hover:shadow-md transition">
+                            <div class="w-10 h-10 bg-emerald-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">3</div>
+                            <h4 class="font-bold text-emerald-900 text-sm mb-2">Faktor Keruntuhan</h4>
+                            <p class="text-xs text-slate-600">Perebutan kekuasaan internal, figur khalifah lemah, dan Serangan Bani Abbasiyah.</p>
+                        </div>
+
+                        <div class="bg-slate-50 border-2 border-emerald-500 rounded-xl p-4 text-center hover:shadow-md transition">
+                            <div class="w-10 h-10 bg-emerald-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">4</div>
+                            <h4 class="font-bold text-emerald-900 text-sm mb-2">Nilai Kepemimpinan</h4>
+                            <p class="text-xs text-slate-600">Keteladanan Umar bin Abdul Aziz: Kesederhanaan, Keadilan, & Ketakwaan.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center pt-4 border-t border-slate-200">
+                    <button onclick="completeTopic('read-petakonsep'); switchTab('materi');" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-8 rounded-xl shadow-md transition">
+                        Masuk Pembahasan Materi Lengkap <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: PEMBAHASAN MATERI LENGKAP -->
+        <section id="tab-materi" class="tab-content hidden space-y-6">
+            
+            <!-- Sub-topic Navigation Buttons -->
+            <div class="bg-white p-2 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap gap-2">
+                <button onclick="setMateriStep(1)" id="materi-btn-1" class="materi-sub-btn flex-1 min-w-[150px] py-3 px-4 rounded-xl text-xs md:text-sm font-semibold transition flex items-center justify-center space-x-2 border border-slate-200">
+                    <span>1. Berdirinya Daulah</span>
+                </button>
+                <button onclick="setMateriStep(2)" id="materi-btn-2" class="materi-sub-btn flex-1 min-w-[150px] py-3 px-4 rounded-xl text-xs md:text-sm font-semibold transition flex items-center justify-center space-x-2 border border-slate-200">
+                    <span>2. Kemajuan Peradaban</span>
+                </button>
+                <button onclick="setMateriStep(3)" id="materi-btn-3" class="materi-sub-btn flex-1 min-w-[150px] py-3 px-4 rounded-xl text-xs md:text-sm font-semibold transition flex items-center justify-center space-x-2 border border-slate-200">
+                    <span>3. Faktor Keruntuhan</span>
+                </button>
+                <button onclick="setMateriStep(4)" id="materi-btn-4" class="materi-sub-btn flex-1 min-w-[150px] py-3 px-4 rounded-xl text-xs md:text-sm font-semibold transition flex items-center justify-center space-x-2 border border-slate-200">
+                    <span>4. Nilai Kepemimpinan</span>
+                </button>
+            </div>
+
+            <!-- SUB MATERI 1 -->
+            <div id="materi-step-1" class="materi-card bg-white p-6 md:p-8 rounded-2xl border border-slate-200 space-y-6">
+                <div class="flex items-center space-x-3 text-emerald-900 border-b border-slate-200 pb-4">
+                    <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-lg flex items-center justify-center font-bold text-lg">1</div>
+                    <div>
+                        <h3 class="text-xl font-bold">Sejarah Berdirinya Daulah Bani Umayyah Damaskus</h3>
+                        <p class="text-xs text-slate-500">Pemerintahan Islam Dinasti Pertama (41 - 132 H / 661 - 750 M)</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 text-sm text-slate-700 leading-relaxed">
+                    <div class="space-y-3 bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-2">
+                            <i class="fa-solid fa-crown text-amber-500"></i> Latar Belakang & Pendiri
+                        </h4>
+                        <p>
+                            Daulah Bani Umayyah didirikan oleh <strong>Muawiyah bin Abi Sufyan</strong> pada tahun 41 Hijriyah (661 Masehi) setelah berakhirnya masa Khulafaur Rosyidin paska wafatnya Ali bin Abi Thalib RA.
+                        </p>
+                        <p>
+                            Nama "Umayyah" dinisbatkan kepada kakek buyut Muawiyah, yaitu <strong>Umayyah bin 'Abd Asy-Syams</strong>, salah satu tokoh terpandang suku Quraisy di Makkah.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3 bg-amber-50/60 p-5 rounded-xl border border-amber-200">
+                        <h4 class="font-bold text-amber-900 flex items-center gap-2">
+                            <i class="fa-solid fa-handshake text-amber-700"></i> Peristiwa Amul Jama'ah (Tahun Persatuan)
+                        </h4>
+                        <p>
+                            Puncak resmi berdirinya Bani Umayyah ditandai dengan peristiwa <strong class="text-amber-900">Amul Jama'ah (عام الجماعة)</strong>, yaitu penyerahan kekuasaan secara damai oleh Hassan bin Ali bin Abi Thalib kepada Muawiyah demi menghindar pertumpahan darah antar sesama umat Islam.
+                        </p>
+                        <p class="text-xs italic text-amber-800">
+                            *Pusat pemerintahan dialihkan dari Madinah ke kota Damaskus (Suriah).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 text-xs md:text-sm text-emerald-950">
+                    <span class="font-bold"><i class="fa-solid fa-circle-info mr-1"></i> Catatan Penting:</span> Sistem kepemimpinan pada masa Khulafaur Rosyidin secara *Musyawarah/Demokrasi* berubah menjadi sistem *Monarki Absolut / Hereditas* (turun-temurun) yang diawali oleh Muawiyah menunjuk putranya Yazid bin Muawiyah.
+                </div>
+            </div>
+
+            <!-- SUB MATERI 2 -->
+            <div id="materi-step-2" class="materi-card bg-white p-6 md:p-8 rounded-2xl border border-slate-200 space-y-6 hidden">
+                <div class="flex items-center space-x-3 text-emerald-900 border-b border-slate-200 pb-4">
+                    <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-lg flex items-center justify-center font-bold text-lg">2</div>
+                    <div>
+                        <h3 class="text-xl font-bold">Kemajuan Peradaban Islam Masa Bani Umayyah Damaskus</h3>
+                        <p class="text-xs text-slate-500">Pemerintahan, Ilmu Pengetahuan, Arsitektur, dan Ekonomi</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 text-sm">
+                    <!-- Administrasi -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-2">
+                        <h4 class="font-bold text-emerald-800 flex items-center gap-2">
+                            <i class="fa-solid fa-building-columns text-emerald-600"></i> Pembentukan Lembaga Negara (Diwan)
+                        </h4>
+                        <ul class="list-disc list-inside space-y-1 text-xs md:text-sm text-slate-700">
+                            <li><strong>Diwan al-Kharaj:</strong> Departemen Keuangan/Pajak.</li>
+                            <li><strong>Diwan al-Khatam:</strong> Departemen Pencatatan & Stempel Resmi Negara.</li>
+                            <li><strong>Diwan al-Barid:</strong> Sistem Pos & Layanan Kurir Cepat.</li>
+                            <li><strong>Diwan al-Jund:</strong> Departemen Pertahanan & Angkatan Bersenjata.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Pembukuan Hadis & Bahasa -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-2">
+                        <h4 class="font-bold text-emerald-800 flex items-center gap-2">
+                            <i class="fa-solid fa-book-quran text-emerald-600"></i> Pembukuan Hadis & Arabisasi
+                        </h4>
+                        <p class="text-xs md:text-sm text-slate-700">
+                            Pada masa Khalifah <strong>Umar bin Abdul Aziz</strong>, instruksi resmi dikeluarkan untuk mengumpulkan dan membukukan Hadis Nabi (kodifikasi) yang dipelopori oleh Ibn Syihab Az-Zuhri.
+                        </p>
+                        <p class="text-xs md:text-sm text-slate-700">
+                            Khalifah <strong>Abdul Malik bin Marwan</strong> menetapkan Bahasa Arab sebagai bahasa resmi administrasi pemerintahan (*Arabisasi*).
+                        </p>
+                    </div>
+
+                    <!-- Mata Uang & Arsitektur -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-2">
+                        <h4 class="font-bold text-emerald-800 flex items-center gap-2">
+                            <i class="fa-solid fa-coins text-emerald-600"></i> Mata Uang & Arsitektur Megah
+                        </h4>
+                        <p class="text-xs md:text-sm text-slate-700">
+                            Dicetaknya mata uang emas (Dinar) dan perak (Dirham) bertuliskan kaligrafi Islam pertama kali.
+                        </p>
+                        <p class="text-xs md:text-sm text-slate-700">
+                            Pembangunan <strong>Masjid Agung Umayyah (Damaskus)</strong> dan Kubah Batu (*Dome of the Rock*) di Yerusalem.
+                        </p>
+                    </div>
+
+                    <!-- Kesehatan -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-2">
+                        <h4 class="font-bold text-emerald-800 flex items-center gap-2">
+                            <i class="fa-solid fa-hospital text-emerald-600"></i> Layanan Kesehatan (Bimaristan)
+                        </h4>
+                        <p class="text-xs md:text-sm text-slate-700">
+                            Membangun rumah sakit pertama dalam sejarah Islam (*Bimaristan*) yang memberikan perawatan gratis khusus untuk penderita kusta dan penyakit menular pada masa Khalifah Al-Walid bin Abdul Malik.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB MATERI 3 -->
+            <div id="materi-step-3" class="materi-card bg-white p-6 md:p-8 rounded-2xl border border-slate-200 space-y-6 hidden">
+                <div class="flex items-center space-x-3 text-emerald-900 border-b border-slate-200 pb-4">
+                    <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-lg flex items-center justify-center font-bold text-lg">3</div>
+                    <div>
+                        <h3 class="text-xl font-bold">Faktor Keruntuhan Daulah Bani Umayyah Damaskus</h3>
+                        <p class="text-xs text-slate-500">Evaluasi Penyebab Kehancuran Dinasti Umayyah (750 M)</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-sm text-slate-700">
+                    <p>
+                        Meskipun berhasil menorehkan peradaban emas, Daulah Bani Umayyah Damaskus mengalami kemunduran paska kepemimpinan Umar bin Abdul Aziz dan akhirnya runtuh pada tahun 132 H (750 M) di bawah pimpinan khalifah terakhir, **Marwan II (Marwan bin Muhammad)**.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-red-50 border border-red-200 rounded-xl space-y-1">
+                            <h4 class="font-bold text-red-900 text-xs md:text-sm"><i class="fa-solid fa-users-slash text-red-600 mr-1"></i> Pertentangan Etnis & Mawali</h4>
+                            <p class="text-xs text-slate-600">Adanya diskriminasi terhadap kaum Mawali (muslim non-Arab seperti Persia dan Berber) yang merasa dinomor-duakan dibanding etnis Arab.</p>
+                        </div>
+
+                        <div class="p-4 bg-red-50 border border-red-200 rounded-xl space-y-1">
+                            <h4 class="font-bold text-red-900 text-xs md:text-sm"><i class="fa-solid fa-chess-king text-red-600 mr-1"></i> Sifat Khalifah Bermewah-mewahan</h4>
+                            <p class="text-xs text-slate-600">Banyak penerus khalifah yang hidup bermewah-mewahan, gemar berfoya-foya, dan meninggalkan nilai-nilai keislaman.</p>
+                        </div>
+
+                        <div class="p-4 bg-red-50 border border-red-200 rounded-xl space-y-1">
+                            <h4 class="font-bold text-red-900 text-xs md:text-sm"><i class="fa-solid fa-[#dc2626] fa-sitemap mr-1"></i> Perebutan Suksesi Internal</h4>
+                            <p class="text-xs text-slate-600">Sistem Monarki menimbulkan perselisihan internal keluarga kerajaan dalam merebut tahta kepemimpinan.</p>
+                        </div>
+
+                        <div class="p-4 bg-red-50 border border-red-200 rounded-xl space-y-1">
+                            <h4 class="font-bold text-red-900 text-xs md:text-sm"><i class="fa-solid fa-flag text-red-600 mr-1"></i> Munculnya Gerakan Bani Abbasiyah</h4>
+                            <p class="text-xs text-slate-600">Gerakan perlawanan yang dipelopori oleh keturunan Abbas bin Abdul Muthalib yang didukung oleh kelompok Syiah dan Mawali (Perang Zab 750 M).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB MATERI 4 -->
+            <div id="materi-step-4" class="materi-card bg-white p-6 md:p-8 rounded-2xl border border-slate-200 space-y-6 hidden">
+                <div class="flex items-center space-x-3 text-emerald-900 border-b border-slate-200 pb-4">
+                    <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-lg flex items-center justify-center font-bold text-lg">4</div>
+                    <div>
+                        <h3 class="text-xl font-bold">Refleksi Nilai Kepemimpinan Khalifah Umar bin Abdul Aziz</h3>
+                        <p class="text-xs text-slate-500">Teladan Khalifah Ke-8 yang Dikenal Sebagai Khulafaur Rosyidin Ke-5</p>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-xl space-y-3">
+                    <h4 class="font-bold text-amber-900 text-base">Profil Singkat Umar bin Abdul Aziz (Memerintah 717 - 720 M)</h4>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                        Meskipun hanya memerintah selama kurang lebih 2,5 tahun, Umar bin Abdul Aziz mampu menciptakan kesejahteraan luar biasa hingga tidak ditemukan seorang pun penerima zakat (Mustahiq) di wilayah kekhalifahannya.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4 text-xs md:text-sm">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                        <div class="w-8 h-8 bg-amber-500 text-white rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <h5 class="font-bold text-emerald-900">1. Keadilan & Kesederhanaan</h5>
+                        <p class="text-slate-600">Mengembalikan harta pribadi dan perhiasan istrinya ke kas negara (*Baitul Mal*) serta hidup sangat sederhana.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                        <div class="w-8 h-8 bg-amber-500 text-white rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-heart text-white"></i></div>
+                        <h5 class="font-bold text-emerald-900">2. Menghapus Diskriminasi</h5>
+                        <p class="text-slate-600">Menyetarakan hak-hak kaum Mawali dengan etnis Arab serta menghentikan tradisi mencaci lawan politik di mimbar Jumat.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                        <div class="w-8 h-8 bg-amber-500 text-white rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-book-open text-white"></i></div>
+                        <h5 class="font-bold text-emerald-900">3. Cinta Ilmu Agama</h5>
+                        <p class="text-slate-600">Memprakarsai pembukuan Hadis secara massal demi menjaga kemurnian ajaran Islam.</p>
+                    </div>
+                </div>
+
+                <div class="text-center pt-4 border-t border-slate-200">
+                    <button onclick="completeTopic('read-materi'); switchTab('video');" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-8 rounded-xl shadow-md transition">
+                        Selesai Membaca & Tonton Video <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- TAB 4: VIDEO EDUKASI PERADABAN BANI UMAYYAH -->
+        <section id="tab-video" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+                <div class="text-center max-w-2xl mx-auto mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800">Video Edukasi Sejarah Bani Umayyah</h2>
+                    <p class="text-slate-600 text-sm mt-1">Saksikan tayangan dokumenter dan pembelajaran interaktif berikut untuk memperdalam pemahaman visual Anda.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Video 1 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                        <div class="relative pt-[56.25%] bg-slate-900">
+                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/HX5Ih-FVNxI" title="Berdirinya Daulah Bani Umayyah" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-4 flex-grow flex flex-col justify-between">
+                            <div>
+                                <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded">Episode 1</span>
+                                <h3 class="font-bold text-slate-800 text-sm mt-2">Sejarah Berdirinya Daulah Bani Umayyah Damaskus</h3>
+                                <p class="text-xs text-slate-500 mt-1">Mengulas peristiwa Amul Jama'ah dan figur pendiri Muawiyah bin Abi Sufyan.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 2 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                        <div class="relative pt-[56.25%] bg-slate-900">
+                            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/P-xIjjB6m3U" title="Perkembangan Islam Bani Umayyah" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-4 flex-grow flex flex-col justify-between">
+                            <div>
+                                <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-1 rounded">Episode 2</span>
+                                <h3 class="font-bold text-slate-800 text-sm mt-2">Perkembangan Peradaban & Kejayaan Islam</h3>
+                                <p class="text-xs text-slate-500 mt-1">Pencapaian ilmu pengetahuan, arsitektur masjid, pembukuan hadis, & sistem pemerintahan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-emerald-50 p-4 rounded-xl border border-emerald-200 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-circle-check text-emerald-600 text-2xl"></i>
+                        <div>
+                            <h4 class="font-bold text-xs md:text-sm text-emerald-950">Sudah Menonton Video?</h4>
+                            <p class="text-xs text-emerald-800">Klik tombol di samping untuk mengklaim poin indikator menonton video.</p>
+                        </div>
+                    </div>
+                    <button onclick="completeTopic('watch-video')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded-lg text-xs md:text-sm transition">
+                        Tandai Selesai Nonton
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: SOAL LATIHAN (FORMATIF) -->
+        <section id="tab-latihan" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+                <div class="border-b border-slate-200 pb-4 mb-6 flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Soal Latihan Pemahaman (Formatif)</h2>
+                        <p class="text-xs md:text-sm text-slate-600">Uji kemampuan dasar Anda sebelum menghadapi Uji Kompetensi Utama.</p>
+                    </div>
+                    <span class="bg-emerald-100 text-emerald-800 font-bold text-xs px-3 py-1.5 rounded-full">5 Soal Formatif</span>
+                </div>
+
+                <form id="latihan-form" class="space-y-6">
+                    <!-- Q1 -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3" data-lat-ans="B">
+                        <p class="font-semibold text-sm text-slate-800">1. Siapakah tokoh pendiri utama Daulah Bani Umayyah di Kota Damaskus?</p>
+                        <div class="space-y-2 text-xs md:text-sm">
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat1" value="A"> <span>A. Yazid bin Muawiyah</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat1" value="B"> <span>B. Muawiyah bin Abi Sufyan</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat1" value="C"> <span>C. Abdul Malik bin Marwan</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat1" value="D"> <span>D. Marwan bin Muhammad</span></label>
+                        </div>
+                        <div class="lat-feedback hidden p-3 rounded-lg text-xs font-medium"></div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3" data-lat-ans="C">
+                        <p class="font-semibold text-sm text-slate-800">2. Peristiwa bersejarah penyerahan kekuasaan secara damai dari Hassan bin Ali kepada Muawiyah dinamakan...</p>
+                        <div class="space-y-2 text-xs md:text-sm">
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat2" value="A"> <span>A. Amul Huzni</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat2" value="B"> <span>B. Perang Siffin</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat2" value="C"> <span>C. Amul Jama'ah</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat2" value="D"> <span>D. Fathu Makkah</span></label>
+                        </div>
+                        <div class="lat-feedback hidden p-3 rounded-lg text-xs font-medium"></div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3" data-lat-ans="A">
+                        <p class="font-semibold text-sm text-slate-800">3. Khalifah Bani Umayyah yang menginstruksikan kodifikasi (pengumpulan & pembukuan) Hadis Nabi secara resmi adalah...</p>
+                        <div class="space-y-2 text-xs md:text-sm">
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat3" value="A"> <span>A. Umar bin Abdul Aziz</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat3" value="B"> <span>B. Al-Walid bin Abdul Malik</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat3" value="C"> <span>C. Muawiyah bin Abi Sufyan</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat3" value="D"> <span>D. Hisyam bin Abdul Malik</span></label>
+                        </div>
+                        <div class="lat-feedback hidden p-3 rounded-lg text-xs font-medium"></div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3" data-lat-ans="D">
+                        <p class="font-semibold text-sm text-slate-800">4. Departemen pencatatan surat dan stempel resmi rahasia negara pada masa Bani Umayyah dinamakan...</p>
+                        <div class="space-y-2 text-xs md:text-sm">
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat4" value="A"> <span>A. Diwan al-Kharaj</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat4" value="B"> <span>B. Diwan al-Barid</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat4" value="C"> <span>C. Diwan al-Jund</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat4" value="D"> <span>D. Diwan al-Khatam</span></label>
+                        </div>
+                        <div class="lat-feedback hidden p-3 rounded-lg text-xs font-medium"></div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3" data-lat-ans="B">
+                        <p class="font-semibold text-sm text-slate-800">5. Sebutan bagi orang non-Arab yang masuk Islam namun sering mendapatkan sikap diskriminatif di masa Bani Umayyah adalah...</p>
+                        <div class="space-y-2 text-xs md:text-sm">
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat5" value="A"> <span>A. Dhimmi</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat5" value="B"> <span>B. Mawali</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat5" value="C"> <span>C. Ansar</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50/50"><input type="radio" name="lat5" value="D"> <span>D. Muhajirin</span></label>
+                        </div>
+                        <div class="lat-feedback hidden p-3 rounded-lg text-xs font-medium"></div>
+                    </div>
+
+                    <div class="pt-2 flex justify-end">
+                        <button type="button" onclick="checkLatihan()" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-8 rounded-xl shadow-md transition">
+                            Periksa Jawaban Latihan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- TAB 6: UJI KOMPETENSI & SERTIFIKAT DOWLOAD -->
+        <section id="tab-ujikom" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+                
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-slate-200">
+                    <div>
+                        <span class="bg-amber-100 text-amber-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            Evaluasi Sumatif Utama
+                        </span>
+                        <h2 class="text-2xl font-bold text-slate-800 mt-1">Uji Kompetensi & Lisensi Sertifikat Kelulusan</h2>
+                        <p class="text-xs md:text-sm text-slate-600">Jawablah 5 soal ujian di bawah ini. Capai nilai minimal <strong class="text-emerald-800">75 (KKTP)</strong> untuk mengklaim dan mengunduh Sertifikat Digital Anda!</p>
+                    </div>
+
+                    <div id="exam-score-box" class="hidden bg-emerald-900 text-white p-4 rounded-2xl text-center min-w-[180px] shadow-lg border-2 border-amber-400">
+                        <div class="text-xs text-amber-300 font-bold">NILAI AKHIR UJIAN</div>
+                        <div id="exam-score-val" class="text-3xl font-extrabold text-amber-400 my-0.5">0</div>
+                        <div id="exam-status-text" class="text-[10px] uppercase font-bold tracking-widest text-emerald-200">TIDAK LULUS</div>
+                    </div>
+                </div>
+
+                <!-- Exam Form -->
+                <form id="exam-form" class="mt-6 space-y-6">
+                    
+                    <!-- Exam Q1 -->
+                    <div class="exam-q bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3" data-q="1" data-ans="C">
+                        <p class="font-semibold text-sm text-slate-800">1. Sistem pemerintahan yang diterapkan oleh Daulah Bani Umayyah Damaskus berbeda dengan Khulafaur Rosyidin, yaitu menggunakan sistem...</p>
+                        <div class="space-y-2 text-xs md:text-sm">
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u1" value="A"> <span>A. Syura (Musyawarah Mufakat)</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u1" value="B"> <span>B. Demokrasi Parlementer</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u1" value="C"> <span>C. Monarki Absolut (Hereditas / Turun-temurun)</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u1" value="D"> <span>D. Teokrasi Murni</span></label>
+                        </div>
+                    </div>
+
+                    <!-- Exam Q2 -->
+                    <div class="exam-q bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3" data-q="2" data-ans="A">
+                        <p class="font-semibold text-sm text-slate-800">2. Di bawah kepemimpinan Khalifah Abdul Malik bin Marwan, salah satu kebijakan peradaban terpenting dalam bidang administrasi dan ekonomi adalah...</p>
+                        <div class="space-y-2 text-xs md:text-sm">
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u2" value="A"> <span>A. Menjadikan Bahasa Arab sebagai bahasa resmi negara & mencetak mata uang Dinar/Dirham</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u2" value="B"> <span>B. Pembangunan perpustakaan Baitul Hikmah</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u2" value="C"> <span>C. Memindahkan ibu kota dari Damaskus ke Baghdad</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u2" value="D"> <span>D. Menghentikan seluruh ekspansi wilayah ke Eropa</span></label>
+                        </div>
+                    </div>
+
+                    <!-- Exam Q3 -->
+                    <div class="exam-q bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3" data-q="3" data-ans="D">
+                        <p class="font-semibold text-sm text-slate-800">3. Fasilitas rumah sakit khusus penderita kusta dan penyakit menular pertama dalam sejarah Islam (*Bimaristan*) dibangun oleh Khalifah...</p>
+                        <div class="space-y-2 text-xs md:text-sm">
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u3" value="A"> <span>A. Yazid bin Muawiyah</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u3" value="B"> <span>B. Umar bin Abdul Aziz</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u3" value="C"> <span>C. Muawiyah bin Abi Sufyan</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u3" value="D"> <span>D. Al-Walid bin Abdul Malik</span></label>
+                        </div>
+                    </div>
+
+                    <!-- Exam Q4 -->
+                    <div class="exam-q bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3" data-q="4" data-ans="B">
+                        <p class="font-semibold text-sm text-slate-800">4. Perang penentuan yang menjadi akhir kehancuran Daulah Bani Umayyah Damaskus akibat serangan pasukan Abbasiyah pada tahun 750 M adalah...</p>
+                        <div class="space-y-2 text-xs md:text-sm">
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u4" value="A"> <span>A. Perang Yarmuk</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u4" value="B"> <span>B. Perang Al-Zab (Sungai Zab)</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u4" value="C"> <span>C. Perang Nahrawan</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u4" value="D"> <span>D. Perang Mu'tah</span></label>
+                        </div>
+                    </div>
+
+                    <!-- Exam Q5 -->
+                    <div class="exam-q bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3" data-q="5" data-ans="C">
+                        <p class="font-semibold text-sm text-slate-800">5. Mengapa Umar bin Abdul Aziz kerap dijuluki sebagai Khulafaur Rosyidin ke-5 oleh para sejarawan muslim?</p>
+                        <div class="space-y-2 text-xs md:text-sm">
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u5" value="A"> <span>A. Karena beliau menguasai benua Eropa dan Amerika</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u5" value="B"> <span>B. Karena beliau memerintah selama 40 tahun berturut-turut</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u5" value="C"> <span>C. Karena kepemimpinannya yang sangat adil, sederhana, wara', dan mengembalikan prinsip Sunnah Nabi</span></label>
+                            <label class="flex items-center space-x-3 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50"><input type="radio" name="u5" value="D"> <span>D. Karena beliau pendiri dinasti Bani Umayyah pertama</span></label>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 flex justify-between items-center border-t border-slate-200">
+                        <span class="text-xs text-slate-500 italic">*Pastikan Nama dan Kelas di bagian atas sudah diisi dengan benar.</span>
+                        <button type="button" onclick="submitExam()" class="bg-amber-500 hover:bg-amber-600 text-emerald-950 font-extrabold py-3 px-8 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-paper-plane mr-2"></i> Kirim Jawaban Uji Kompetensi
+                        </button>
+                    </div>
+                </form>
+
+                <!-- CERTIFICATE GENERATOR CARD (Hidden Until Passed) -->
+                <div id="certificate-claim-panel" class="hidden mt-10 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 p-1 rounded-2xl shadow-xl">
+                    <div class="bg-white p-6 md:p-8 rounded-[14px] text-center space-y-4">
+                        <div class="w-16 h-16 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto text-3xl">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-emerald-950">SELAMAT! ANDA DINATAKAN LULUS</h3>
+                        <p class="text-slate-600 text-sm max-w-xl mx-auto">
+                            Anda telah berhasil menyelesaikan Uji Kompetensi Materi Daulah Bani Umayyah Damaskus dengan hasil memuaskan. Unduh Sertifikat resmi Anda di bawah ini!
+                        </p>
+                        
+                        <div class="flex flex-wrap justify-center gap-4 pt-2">
+                            <button onclick="downloadPDFCertificate()" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-3 px-6 rounded-xl shadow-md transition flex items-center gap-2">
+                                <i class="fa-solid fa-file-pdf text-amber-400"></i> Unduh Sertifikat (PDF)
+                            </button>
+                            <button onclick="printCertificate()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-6 rounded-xl shadow-md transition flex items-center gap-2">
+                                <i class="fa-solid fa-print"></i> Cetak Sertifikat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 7: REFLEKSI KEPEMIMPINAN -->
+        <section id="tab-refleksi" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+                <div class="border-b border-slate-200 pb-4 mb-6">
+                    <h2 class="text-2xl font-bold text-slate-800">Refleksi Nilai Kepemimpinan</h2>
+                    <p class="text-xs md:text-sm text-slate-600">Internalisasi karakter dan keteladanan kepemimpinan Islam dalam kehidupan sehari-hari siswa SMP Islam Al Azhar 26 Yogyakarta.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl space-y-3">
+                        <h4 class="font-bold text-emerald-950 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-quote-left text-amber-500"></i> Komitmen Diri Siswa Al Azhar
+                        </h4>
+                        <p class="text-xs md:text-sm text-emerald-900 leading-relaxed italic">
+                            "Mempelajari kejayaan dan runtuhnya Daulah Bani Umayyah mengajarkan kita bahwa kekuasaan tanpa keadilan dan ketakwaan akan sirna, namun ilmu pengetahuan dan kepemimpinan yang adil akan abadi dikenang sejarah."
+                        </p>
+                    </div>
+
+                    <!-- Reflection Checklist Form -->
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-sm text-slate-800">Checklist Sikap & Teladan:</h4>
+                        
+                        <label class="flex items-start space-x-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200 cursor-pointer">
+                            <input type="checkbox" onchange="completeTopic('refleksi-1')" class="mt-1 text-emerald-600 rounded focus:ring-emerald-500">
+                            <span class="text-xs md:text-sm text-slate-700">Saya berkomitmen untuk bersikap <strong>Adil & Menghindari Diskriminasi</strong> dalam berteman di lingkungan SMP Islam Al Azhar 26 Yogyakarta sebagaimana diteladankan Khalifah Umar bin Abdul Aziz.</span>
+                        </label>
+
+                        <label class="flex items-start space-x-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200 cursor-pointer">
+                            <input type="checkbox" onchange="completeTopic('refleksi-2')" class="mt-1 text-emerald-600 rounded focus:ring-emerald-500">
+                            <span class="text-xs md:text-sm text-slate-700">Saya termotivasi untuk <strong>Semangat Menuntut Ilmu</strong> dan mengembangkan literasi/teknologi seperti para ilmuwan di masa Bani Umayyah.</span>
+                        </label>
+
+                        <label class="flex items-start space-x-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200 cursor-pointer">
+                            <input type="checkbox" onchange="completeTopic('refleksi-3')" class="mt-1 text-emerald-600 rounded focus:ring-emerald-500">
+                            <span class="text-xs md:text-sm text-slate-700">Saya membiasakan hidup <strong>Sederhana & Rendah Hati</strong> serta jauhi sifat berfoya-foya agar terhindar dari kehancuran moral.</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- HIDDEN PRINTABLE CERTIFICATE TEMPLATE -->
+    <div class="hidden">
+        <div id="printable-certificate" class="w-[1050px] h-[740px] p-10 bg-white border-[14px] border-emerald-900 relative flex flex-col justify-between text-slate-800 font-serif">
+            
+            <!-- Certificate Gold Inner Border -->
+            <div class="absolute inset-3 border-2 border-amber-500 pointer-events-none"></div>
+
+            <!-- Top Header -->
+            <div class="text-center space-y-2 mt-4">
+                <div class="flex justify-center items-center gap-3">
+                    <i class="fa-solid fa-mosque text-3xl text-emerald-800"></i>
+                    <h2 class="text-xl font-bold tracking-widest text-emerald-950 font-serif-gold">SMP ISLAM AL AZHAR 26 YOGYAKARTA</h2>
+                    <i class="fa-solid fa-star text-amber-500"></i>
+                </div>
+                <p class="text-xs tracking-wider text-slate-600 uppercase">Yayasan Asy-Syukriyyah • Pengembangan Pembelajaran PAI & Budi Pekerti</p>
+                <div class="w-32 h-0.5 bg-amber-500 mx-auto my-2"></div>
+                <h1 class="text-3xl font-extrabold text-emerald-900 font-serif-gold tracking-wider">SERTIFIKAT KETUNTASAN BELAJAR</h1>
+                <p class="text-xs text-slate-500 italic">Nomor: YAA26/MPI-PAI/VII/2026/<span id="cert-number">101</span></p>
+            </div>
+
+            <!-- Body Content -->
+            <div class="text-center space-y-4 my-2">
+                <p class="text-sm text-slate-600">Diberikan secara resmi kepada siswa :</p>
+                
+                <div class="space-y-1">
+                    <h3 id="cert-student-name" class="text-3xl font-extrabold text-emerald-950 underline decoration-amber-500 font-serif-gold">NAMA SISWA LENGKAP</h3>
+                    <p id="cert-student-class" class="text-sm font-semibold text-amber-800">Kelas: 7 Al-Khawarizmi</p>
+                </div>
+
+                <p class="text-xs md:text-sm text-slate-700 max-w-2xl mx-auto leading-relaxed">
+                    Dinyatakan <strong>TUNTAS & LULUS</strong> pada Uji Kompetensi Media Pembelajaran Interaktif (MPI) materi Sejarah Kebudayaan Islam: <br>
+                    <strong class="text-emerald-900">"Daulah Bani Umayyah Periode Damaskus (661 - 750 M)"</strong> <br>
+                    dengan Perolehan Nilai Akhir Evaluasi:
+                </p>
+
+                <!-- Score Circle -->
+                <div class="inline-block bg-emerald-900 text-amber-400 font-extrabold text-2xl px-6 py-2 rounded-2xl border-2 border-amber-400 shadow-md">
+                    NILAI: <span id="cert-score">100</span> / 100
+                </div>
+            </div>
+
+            <!-- Signatures -->
+            <div class="flex justify-between items-end px-12 mb-4 text-xs">
+                <div class="text-center space-y-12">
+                    <p class="text-slate-600">Mengetahui,<br>Kepala SMP Islam Al Azhar 26</p>
+                    <div>
+                        <p class="font-bold underline text-slate-900">M. Arifin, M.Pd.</p>
+                        <p class="text-[10px] text-slate-500">NIY. 2601001</p>
+                    </div>
+                </div>
+
+                <!-- Watermark Stamp -->
+                <div class="w-24 h-24 border-4 border-amber-500/40 rounded-full flex items-center justify-center text-center p-1 transform -rotate-12">
+                    <span class="text-[9px] font-bold text-amber-700 uppercase">SMP ISLAM AL AZHAR 26 YOGYAKARTA</span>
+                </div>
+
+                <div class="text-center space-y-12">
+                    <p class="text-slate-600">Sleman, <span id="cert-date">19 Oktober 2026</span><br>Guru Pengampu PAI,</p>
+                    <div>
+                        <p class="font-bold underline text-slate-900">H. Munawir, S.Pd.I., M.Pd. Gr.</p>
+                        <p class="text-[10px] text-slate-500">NIP. 19820512 201001 1 008</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-950 text-emerald-400 text-xs text-center py-6 border-t border-emerald-900 mt-auto">
+        <p>© 2026 SMP Islam Al Azhar 26 Yogyakarta • PAI & Budi Pekerti Kelas 7</p>
+        <p class="text-emerald-600 mt-1">Dirancang oleh H. Munawir, S.Pd.I., M.Pd. Gr. • Media Pembelajaran Interaktif berbasis Digital</p>
+    </footer>
+
+    <script>
+        // State Management
+        let completedTopics = new Set();
+        const TOTAL_INDICATORS = 7; // Total learning milestones
+        let currentScore = 0;
+
+        // Switch Main Tabs
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(el => {
+                el.classList.remove('bg-emerald-800', 'text-white', 'font-bold');
+                el.classList.add('text-emerald-200');
+            });
+
+            const activeTab = document.getElementById('tab-' + tabId);
+            const activeNav = document.getElementById('nav-' + tabId);
+
+            if (activeTab) activeTab.classList.remove('hidden');
+            if (activeNav) {
+                activeNav.classList.add('bg-emerald-800', 'text-white', 'font-bold');
+                activeNav.classList.remove('text-emerald-200');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Sub Materi Steps
+        function setMateriStep(stepNum) {
+            document.querySelectorAll('.materi-card').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.materi-sub-btn').forEach(el => {
+                el.classList.remove('bg-emerald-700', 'text-white', 'shadow-md');
+                el.classList.add('bg-white', 'text-slate-700');
+            });
+
+            const currentCard = document.getElementById('materi-step-' + stepNum);
+            const currentBtn = document.getElementById('materi-btn-' + stepNum);
+
+            if (currentCard) currentCard.classList.remove('hidden');
+            if (currentBtn) {
+                currentBtn.classList.remove('bg-white', 'text-slate-700');
+                currentBtn.classList.add('bg-emerald-700', 'text-white', 'shadow-md');
+            }
+        }
+
+        // Progress Completion Tracker
+        function completeTopic(topicKey) {
+            completedTopics.add(topicKey);
+            const progressPct = Math.min(Math.round((completedTopics.size / TOTAL_INDICATORS) * 100), 100);
+            
+            document.getElementById('progress-bar').style.width = progressPct + '%';
+            document.getElementById('progress-text').textContent = progressPct + '%';
+        }
+
+        // Student Data Sync
+        function updateStudentData() {
+            const name = document.getElementById('student-name').value || 'NAMA SISWA LENGKAP';
+            const studentClass = document.getElementById('student-class').value || 'Kelas 7';
+
+            document.getElementById('cert-student-name').textContent = name.toUpperCase();
+            document.getElementById('cert-student-class').textContent = 'Kelas: ' + studentClass;
+        }
+
+        // Check Formative Practice
+        function checkLatihan() {
+            const boxes = document.querySelectorAll('#latihan-form [data-lat-ans]');
+            let score = 0;
+
+            boxes.forEach(box => {
+                const correct = box.getAttribute('data-lat-ans');
+                const name = box.querySelector('input[type="radio"]').name;
+                const selected = document.querySelector(`input[name="${name}"]:checked`);
+                const feedback = box.querySelector('.lat-feedback');
+
+                feedback.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+
+                if (selected && selected.value === correct) {
+                    score += 20;
+                    feedback.classList.add('bg-green-100', 'text-green-800');
+                    feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> Benar!';
+                } else {
+                    feedback.classList.add('bg-red-100', 'text-red-800');
+                    feedback.innerHTML = `<i class="fa-solid fa-circle-xmark mr-1"></i> Salah! Jawaban benar adalah: <strong>${correct}</strong>`;
+                }
+            });
+
+            completeTopic('latihan-done');
+        }
+
+        // Submit Exam & Check Score
+        function submitExam() {
+            const name = document.getElementById('student-name').value.trim();
+            const studentClass = document.getElementById('student-class').value.trim();
+
+            if (!name) {
+                alert('Mohon isi NAMA LENGKAP Anda terlebih dahulu di bagian atas!');
+                document.getElementById('student-name').focus();
+                return;
+            }
+
+            const examQuestions = document.querySelectorAll('.exam-q');
+            let score = 0;
+
+            examQuestions.forEach(qBox => {
+                const qNum = qBox.getAttribute('data-q');
+                const correct = qBox.getAttribute('data-ans');
+                const selected = document.querySelector(`input[name="u${qNum}"]:checked`);
+
+                if (selected && selected.value === correct) {
+                    score += 20; // 5 questions * 20 = 100
+                }
+            });
+
+            currentScore = score;
+            completeTopic('exam-done');
+
+            // UI Feedback
+            const scoreBox = document.getElementById('exam-score-box');
+            const scoreVal = document.getElementById('exam-score-val');
+            const statusText = document.getElementById('exam-status-text');
+            const certClaim = document.getElementById('certificate-claim-panel');
+
+            scoreBox.classList.remove('hidden');
+            scoreVal.textContent = score;
+            document.getElementById('cert-score').textContent = score;
+
+            if (score >= 75) {
+                statusText.textContent = "LULUS (KKTP TERCAPAI)";
+                statusText.className = "text-[10px] uppercase font-bold tracking-widest text-amber-300";
+                certClaim.classList.remove('hidden');
+            } else {
+                statusText.textContent = "BELUM TUNTAS";
+                statusText.className = "text-[10px] uppercase font-bold tracking-widest text-red-300";
+                certClaim.classList.add('hidden');
+                alert(`Nilai Anda: ${score}. Nilai minimal kelulusan adalah 75. Silakan pelajari kembali materi dan coba lagi!`);
+            }
+
+            // Date Stamp
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('cert-date').textContent = today.toLocaleDateString('id-ID', options);
+
+            window.scrollTo({ top: scoreBox.offsetTop - 100, behavior: 'smooth' });
+        }
+
+        // Download Certificate PDF
+        function downloadPDFCertificate() {
+            const element = document.getElementById('printable-certificate');
+            element.parentElement.classList.remove('hidden');
+
+            const opt = {
+                margin:       0,
+                filename:     `Sertifikat_PAI_AlAzhar26_${document.getElementById('student-name').value}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.parentElement.classList.add('hidden');
+            });
+        }
+
+        // Print Certificate
+        function printCertificate() {
+            const element = document.getElementById('printable-certificate');
+            element.parentElement.classList.remove('hidden');
+            window.print();
+            element.parentElement.classList.add('hidden');
+        }
+
+        // Initializer
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('pendahuluan');
+            setMateriStep(1);
+        });
+    </script>
+</body>
+</html>
